@@ -48,6 +48,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void _reset() {
+    // Clear the current result first. Resetting the form can notify dropdown
+    // listeners, which otherwise try to recalculate while text fields are empty.
+    _result = null;
     _formKey.currentState?.reset();
     _age.clear();
     _height.clear();
@@ -56,7 +59,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _sex = BiologicalSex.female;
       _activity = ActivityLevel.sedentary;
       _goal = CalorieGoal.maintain;
-      _result = null;
     });
   }
 
